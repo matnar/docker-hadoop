@@ -1,4 +1,4 @@
-# Creates pseudo distributed hadoop 2.7.3
+# Creates pseudo distributed hadoop 2.7.6
 #
 # docker build -t matnar/hadoop .
 
@@ -18,8 +18,9 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # # hadoop
-RUN wget http://it.apache.contactlab.it/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz ; tar -zxf hadoop-2.7.3.tar.gz -C /usr/local/ ; rm hadoop-2.7.3.tar.gz
-RUN cd /usr/local && ln -s ./hadoop-2.7.3 hadoop
+RUN wget http://it.apache.contactlab.it/hadoop/common/hadoop-2.7.6/hadoop-2.7.6.tar.gz ; tar -zxf hadoop-2.7.6.tar.gz -C /usr/local/ ; rm hadoop-2.7.6.tar.gz
+RUN cd /usr/local && ln -s ./hadoop-2.7.6 hadoop
+
 # 
 ENV HADOOP_PREFIX /usr/local/hadoop
 ENV HADOOP_COMMON_HOME /usr/local/hadoop
