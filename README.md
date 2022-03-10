@@ -1,4 +1,4 @@
-# A simple Apache Hadoop 2.7.3 Docker image
+# A simple Apache Hadoop 3.3.2 Docker image
 
 This is a very simple and not optimized Docker image containing Apache Hadoop. 
 
@@ -11,14 +11,14 @@ As you will notice, the container is not optimized. However, we provide the Dock
 You can build your own image, using the Dockerfile. Just run the following command: 
 
 ```
-docker build  -t matnar/hadoop:2.7.3 .
+docker build  -t matnar/hadoop:3.3.2 .
 ```
 # Pull the image
 
 This image is also released as an official Docker image from Docker's automated build repository - you can always pull or refer the image when launching containers.
 
 ```
-docker pull matnar/hadoop
+docker pull matnar/hadoop:3.3.2
 ```
 
 # Start a container
@@ -26,7 +26,7 @@ docker pull matnar/hadoop
 In order to use the Docker image you have just build or pulled use:
 
 ```
-docker run -t -i -p 50070:50070 --name=master matnar/hadoop 
+docker run -t -i -p 9870:9870 --network=hadoop_network --name=master matnar/hadoop
 ```
 
 ## Create an isolated network with several datanodes
@@ -34,9 +34,10 @@ docker run -t -i -p 50070:50070 --name=master matnar/hadoop
 ```
 docker network create --driver bridge hadoop_network
 
-docker run -t -i -p 50075:50075 -d --network=hadoop_network --name=slave1 matnar/hadoop 
-docker run -t -i -p 50076:50075 -d --network=hadoop_network --name=slave2 matnar/hadoop 
-docker run -t -i -p 50077:50075 -d --network=hadoop_network --name=slave3 matnar/hadoop 
-docker run -t -i -p 50070:50070 --network=hadoop_network --name=master matnar/hadoop 
+  docker run -t -i -p 9864:9864 -d --network=hadoop_network --name=slave1 matnar/hadoop
+  docker run -t -i -p 9863:9864 -d --network=hadoop_network --name=slave2 matnar/hadoop
+  docker run -t -i -p 9862:9864 -d --network=hadoop_network --name=slave3 matnar/hadoop
+  docker run -t -i -p 9870:9870 --network=hadoop_network --name=master matnar/hadoop
+
 ```
 
